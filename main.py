@@ -13,6 +13,6 @@ grenade = []
 # Получаем наименование и цену
 for item in soup.find_all('div', class_='col-sm-3 box-product'):
     title = item.h4.a.get_text()
-    price = item.price
+    price = item.find('div', class_='price').get_text(strip=True)
     print(title)
     print(price)
