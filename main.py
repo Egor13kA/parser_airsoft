@@ -11,8 +11,15 @@ soup = BeautifulSoup(html, 'html.parser')
 grenade = []
 
 # Получаем наименование и цену
-for item in soup.find_all('div', class_='col-sm-3 box-product'):
+
+for item in soup.find('div', class_='product-grid row').find_all('div', class_='col-sm-3 box-product'):
     title = item.h4.a.get_text()
     price = item.find('div', class_='price').get_text(strip=True)
-    print(title)
-    print(price)
+    grenade.append({
+       'title': title,
+       'price': price
+    })
+    # print(title)
+    # print(price)
+
+print(grenade)
