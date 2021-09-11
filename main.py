@@ -14,7 +14,10 @@ grenade = []
 
 for item in soup.find('div', class_='product-grid row').find_all('div', class_='col-sm-3 box-product'):
     title = item.h4.a.get_text()
-    price = item.find('div', class_='price').get_text(strip=True)
+    if item.find(class_='price-new') == None:
+        price = item.find('div', class_='price').get_text(strip=True)
+    else:
+        price = item.find(class_='price-new').get_text(strip=True)
     grenade.append({
        'title': title,
        'price': price
