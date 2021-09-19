@@ -19,11 +19,11 @@ class airwars:
             else:
                 price = item.find(class_='price-new').get_text(strip=True)
             # Проверка наличия
-            if item.find('div', class_='cart') is None:
+            if item.find('input', class_='button') is None:
                 instock = 0
             else:
                 instock = 1
-            grenade.append({'title': title, 'price': price.replace(' p.', ''), 'instock': instock})
+            grenade.append({'title': title, 'price': int(price.replace(' p.', '')), 'instock': instock})
         return grenade
 
 
