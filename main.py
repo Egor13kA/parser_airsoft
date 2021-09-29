@@ -1,21 +1,19 @@
-from bs4 import BeautifulSoup
-import urllib.request
-import classes
+from classes import *
 
-iteration_count = 4
+a = airwars()
+# Вызываем парсер сайта air-wars.ru, ищем гранаты.
+for i in range(1, 5):
+    site = soup_grenade_airwars(i)
+    a.grenade_airwars(site)
 
-for item in range(1,5):
-    # Получаем html
-    req = urllib.request.urlopen(f'https://air-wars.ru/rashodniki/pirotehnika/?page={item}')
-    html = req.read()
-    # Получаем soup с карточками товара
-    soup = BeautifulSoup(html, 'html.parser')
-    # Вызываем парсер сайта air-wars.ru, ищем гранаты.
-    gren = classes.airwars(soup).grenade_airwars()
-    # Записываем в БД
-    classes.insert_gren(gren)
+# Записываем в БД
+insert_gren(a.grenade)
 
+# Вызываем парсер сайта air-wars.ru, ищем шары
+for i in range(1, 4):
+    site = soup_bb_airwars(i)
+    a.bb_airwars(site)
 
-
-
+# Записываем в БД
+insert_bbs(a.bbs)
 
